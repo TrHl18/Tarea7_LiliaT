@@ -1,0 +1,53 @@
+-- TAREA 7 FUNCIONES agregadas, where, group y order by 
+
+-- De la tabla Usuarios: Consulta que devuelva los nombres de la tabla Usuario que su nombre comience con la letra 'J'
+SELECT nombres
+FROM usuario u
+WHERE nombres LIKE 'J%'
+ORDER BY nombres ASC;
+
+-- De la tabla Vehiculo: Consulta que devuelva los vehículos de la marca MACK
+SELECT *
+FROM vehiculos v 
+WHERE marca = 'MACK';
+
+-- Consulta de la tabla vehiculo que devuelva los vehículos que cuenten con una placa de Remolque
+SELECT *
+FROM vehiculos v 
+WHERE placaremolque <> '';
+
+-- Consulta que muestre las placas con registro superior a 'AAZ'
+SELECT *
+FROM vehiculos v 
+WHERE placaprincipal > 'AAZ';
+
+-- Consulta que devuelva la cantidad de vehículos de cada marca, evitando mostrar registros de vehículos que no tengan marca
+SELECT marca AS Marca, COUNT(marca) AS cantidad 
+FROM vehiculos v 
+WHERE marca <> ''
+GROUP BY marca 
+ORDER BY cantidad DESC;
+
+-- De la tabla Conductor: Consulta de la tabla conductor donde muestre a todos los conductores con el apellido 'Hernandez'
+SELECT *
+FROM conductor c 
+WHERE UPPER(nombre) LIKE '% HERNANDEZ%';
+
+-- De la tabla boletas: Consulta que devuelva la cantidad de boletas procesadas
+SELECT COUNT(*) AS BoletasProcesadas
+FROM boletas b;
+
+-- Consulta que muestre el peso de entrada máximo y el peso de entrada mínimo
+SELECT MAX(peso_entrada) AS PesoEntrada_MAX, MIN(peso_entrada) AS PesoEntrada_MIN
+FROM boletas b;
+
+-- Consulta que muestre el peso de entrada máximo y el peso de entrada mínimo del proveedorid 1002
+SELECT MAX(peso_entrada) AS PesoEntrada_MAX, MIN(peso_entrada) AS PesoEntrada_MIN
+FROM boletas b 
+WHERE proveedorid = 1002;
+
+-- Consulta que muestre los registros de entrada y salida de peso de fecha y hora '20170401' al '20170410'
+SELECT fechahoraingreso, fechahorasalida 
+FROM boletas b 
+WHERE fechahoraingreso BETWEEN '2017-04-01 00:00:00' AND '2017-04-10 23:59:59'
+AND fechahorasalida BETWEEN '2017-04-01 00:00:00' AND '2017-04-10 23:59:59';
